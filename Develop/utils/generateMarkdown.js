@@ -1,20 +1,123 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-function renderLicenseBadge(license) {}
+// Returns a license badge based on which license is passed in
+// // If there is no license, returns an empty string
+function renderLicenseBadge(license) {
+    switch (license) {
+    case 'Apache 2.0':
+      return(
+        '![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)'
+      )
+      break;
+    case 'MIT':
+      return(
+        '![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)'
+      )
+      break;
+    case 'GPL v3':
+      return(
+        '![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)'
+      )
+      break; 
+    case 'Other':
+      return "" 
+      break;
+    case 'None':  
+      return ""
+      break;
+    }
+}
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
+// Generates markdown for README
+function generateMarkdown(responses) {
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
+  return(
+  `# ${responses.projectName}
 
-// TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-  return `# ${data.title}
+  ## Description  
 
-`;
+
+  ${responses.summary}
+
+
+  ## Table of Contents
+  -[Problem Solved](#solved)
+
+  -[What I learned](#learn)
+
+  -[Installation](#installation)
+
+  -[Usage](#usage)
+
+  -[Credits](#credits)
+
+  -[License](#license)
+
+  -[Features](#features)
+
+  -[Contributing](#contributing)
+
+  -[Tests](#tests)
+  
+  ## Problems Solved
+
+
+  ${responses.solved}
+
+  ## What I learned
+
+  
+  ${responses.learn}
+  
+
+  ## Installation
+
+  ${responses.installation}
+
+  
+  ## Usage
+
+  ${responses.usage}
+
+  
+  ## Credits
+
+  ${responses.credits}
+
+  
+  ## License
+
+  ${responses.license}
+ 
+  ${renderLicenseBadge(responses.license)}
+  
+
+  ## Features
+
+  ${responses.features}
+
+  
+  ## Contribution
+
+  ${responses.contributions}
+
+  
+  ## Tests
+
+  ${responses.testing}
+
+ 
+  ## Demo
+
+  ${responses.demo}
+
+  
+  ## Questions
+
+  ${responses.userName}
+  'https://github.com/${responses.userName}'
+
+ 
+  Reach me with additional questions at ${responses.email}
+  `);
 }
 
 module.exports = generateMarkdown;

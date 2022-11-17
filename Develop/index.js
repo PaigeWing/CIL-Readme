@@ -1,22 +1,23 @@
 const inquirer = require('inquirer');
-const fs= require('fs');
+const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
-const questions = [
+    inquirer.prompt([
+    {
+         type: 'input',
+         message: 'Enter your GitHub username',
+         name: 'userName',
+    },
     {
         type: 'input',
-        message: 'Enter your GitHub repository name.',
+        message: 'Enter your GitHub repository name',
         name: 'projectName',
     },
     {
         type: 'input',
-        message: 'Enter a summary that describes your project.',
+        message: 'Provide a summary for your project',
         name: 'summary',
-    },
-    {
-        type: 'input',
-        message: 'What was the motivation behind creating this project?',
-        name: 'motivation',
     },
     {
         type: 'input',
@@ -30,16 +31,6 @@ const questions = [
     },
     {
         type: 'input',
-        message: 'What makes your project unique?',
-        name: 'unique',
-    },
-    {
-        type: 'input',
-        message: 'Enter the URL(s) for any screenshots and project demonstrations.',
-        name: 'url',
-    },
-    {
-        type: 'input',
         message: 'What are the steps to install your project?',
         name: 'installation',
     },
@@ -50,43 +41,50 @@ const questions = [
     },
     {
         type: 'input',
-        message: 'List any credits you have.',
+        message: 'List any credits you have',
         name: 'credits',
     },
     {
-        type: 'input',
-        message: 'Enter the license for your project if you have one.',
+        type: 'list',
+        message: 'Select a license for your project.',
         name: 'license',
+        choices: ['Apache 2.0', 'MIT', 'GPL v3', 'Other', 'None'],
     },
     {
         type: 'input',
-        message: 'List any extra features your project has.',
+        message: 'List any extra features your project has',
         name: 'features',
     },
     {
         type: 'input',
-        message: 'Enter contribution guidelines if any.',
+        message: 'Enter contribution guidelines if any',
         name: 'contributions',
     },
     {
         type: 'input',
-        message: 'Enter testing instructions if any.',
+        message: 'Enter testing instructions if any',
         name: 'testing',
     },
     {
         type: 'input',
-        message: 'Enter your gitHub profile URL and any other contact info you would like to.',
-        name: 'contactInfo',
-    },   
-];
+        message: 'Provide link to demo if you have one',
+        name: 'demo',
+    }, 
+    {
+        type: 'input',
+        message: 'Enter your email address',
+        name: 'email',
+    }, 
+])
+.then((responses) => {
+        const filename = 'myREADME.md';
+        const data = responses
+       createFile(filename, data)
+});
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-function init() {}
-
-// Function call to initialize app
-init();
-
+const createFile =  (filename, data) => {
+    fs.writeFileSync(filename, generateMarkdown(data), err => err ? console.error 
+        (err) : console.log('Completed')
+        );
+}
 
